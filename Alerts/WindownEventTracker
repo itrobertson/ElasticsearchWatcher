@@ -1,0 +1,89 @@
+POST /_xpack/watcher/watch/_execute?pretty
+{
+  "watch" : {
+      "trigger": {
+           "schedule": {
+      "interval": "24h"
+    }
+      },
+      "input": {
+        "search": {
+          "request": {
+            "indices": [
+              "pipeline-windows-*"
+            ],
+            "body": {
+              "query": {
+                "bool": {
+                  "must": [
+                    {
+                        "range": {
+                          "@timestamp": {
+                            "gt": "now-7d"
+                          }
+                        }
+                    },
+                    {
+                      "exists": {
+                        "field": "Username"
+                      }
+                    }
+                  ],
+                  "must_not" : [
+                    {
+                    "term" : {
+                      "SecurityID" : "S-1-5-21"                    }
+                      },
+{
+   "term" : {
+     "SubjectDomainName" : "NAE"
+   }
+}]
+                }
+              },
+                            "size": 0,
+              "aggs": {
+                "by_user": {
+                  "terms": {
+                    "field": "Username",
+                    "size": 1000000
+                  
+
+            },
+            "aggs" : {
+              "events" : {
+                "terms" : {
+                  "field" : "EventID"
+                }
+              }
+            }}
+              }}}
+        }
+      },
+      
+      "condition": {
+     "compare": {
+      "ctx.payload.hits.total": {
+        "gt": 0
+      }
+    }
+
+      },
+
+
+      "actions": {
+     "send_email" : {
+
+        "email" : {
+                       "to" : ["ian.t.robertson.ctr@mail.mil", "<VAR>"],  "subject" : "Who's Watching You?",
+               "body": "Description: This is an overall look at a test instance of how we are analyzing user
+               activities on our Windows Domain. Below is an aggregation of Windows User accounts combined with the Windows Event ID 
+               for executables and sorted by number of occurrences within the last 7 days based upon a 
+               limited dataset.\n\n{{#ctx.payload.aggregations.by_user.buckets}}{{key}} : 
+               \n {{#events.buckets}} \n \t {{key}} : # of executions {{doc_count}} \n{{/events.buckets}}\n
+               {{/ctx.payload.aggregations.by_user.buckets}}"
+        }
+      }
+}
+}
+}
