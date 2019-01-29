@@ -13,8 +13,10 @@ TODO: Automation can be perform on any part of the Watch. Further discussion may
 
 USE CASES:
 
+---
 
-List of Use Cases Demonstrating Broad Capabilities
+List of Use Cases Demonstrating Broad Capabilities:
+---
 Contents
 Daily Status Reports	1
 New Activities Found	1
@@ -22,18 +24,28 @@ Systems Reporting	3
 Critical Auth Logs	4
 Windows Process Logs	5
 
+---
+
 The following list is a compilation of Use cases together with their output.
 Daily Status Reports
 
 The following users are currently in an inactive state for the past 30 Days or more:
 
+---
+
+
 RAW DATA RESULTS:
 {jboyd=1, crosenberger=1, jkautz=1, sboyd=1, esmothers=1, dwhitten=1, jnelson=1, spersaud=1, russells=1, yamargui=1, Reedye=1, robinsona=1, tobenshain=1, lterada=1, rolayinka=1, wranglersystem=1, byrda=1, ablizzard=1, houstona=1, BLModest_SA=1, rcalvert=1, dgoldman=1, wgibson=1, jstorms=1, rparra=1, ddawson=1, dabotchie=1, skhanal=1, mschultz=1, nhoffman=1, blarson=1, gillemk=1, amartin=1, msandretto=1, mreich=1, mgutknecht=1, swilson=1, jjao=1, jnoseworthy=1, rrizvi=1, drivenbark=1, sewers=1, aosgood=1, gadams=1, ceddy=1, hmartin=1, aoniha=1, pontiac2system=1, rwilson=1}
+
+---
 
 EXAMPLES:
 Inactive Users, Suspicious Activities/programs/applications, trends, volume activities
 New Activities Found
 Pipeline HBSS Logs
+
+---
+
 
    This program captures everything that was created on the network to include new accounts, groups, software deployments, installations, tasks, etc...
 Additionally, this program is designed to track all these new activities into a seperate index. This data store is user agnostic! 
@@ -144,9 +156,13 @@ Systems Reporting
 
 Pipeline Auth Logs
 
+---
+
    The following systems have not reported logs in the last 24h hours using  a 3d window.
 USE CASE: Verify Systems Reporting, Systems connectivity, and/or Data Validation 
 Do per each index type.
+
+---
 
 128.63.93.64  
 128.63.18.63  
@@ -168,6 +184,8 @@ Do per each index type.
 158.12.62.33 
 Critical Auth Logs
 175 Critical Errors have occured in Auth Pipeline within past 24 hours
+
+---
 
 MESSAGE: fatal: Cannot bind any address.
 TIME: 2017-02-03T22:16:26.000Z
@@ -221,11 +239,11 @@ SOURCE: XXX.XXX.army.mil
 Windows Process Logs 
 Pipeline Windows Logs
 
-
+---
 
 This Alert collects executables ran across the windows domains for a 30-day period, aggregates them according to process, and further aggregates them according to username (also, source ip possible)
 
-
+---
 
  USE CASE: Daily Reporting, User Activity Monitoring, Process Management, Security Monitoring
  
