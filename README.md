@@ -1,7 +1,10 @@
 Watcher Scripts Automation Parameters:
 
 These are examples of typical Watcher Alerts, by design the automation component will fill in the variables. For example, you can choose to use BRO/HBSS/ACAS logs or allow the algorithm to chose for you. In addition, you design will allow you the user to pass in the parameter such as aggregation variable, email send to list(s), type of nested aggregation can also be passed in as reference for instance.
+
 TODO: Automation can be perform on any part of the Watch. Further discussion may ultimately be required; however, for the most part its plug-and-play with a pass of the variables such as time intervals, username, and even aggregation criteria.
+
+
 USE CASES:
 
 
@@ -162,12 +165,12 @@ Critical Auth Logs
 
 MESSAGE: fatal: Cannot bind any address.
 TIME: 2017-02-03T22:16:26.000Z
-HOST: 128.63.27.61
-SOURCE: foehn-wind.arl.army.mil
+HOST:  XXX.XXX.XXX.XXX
+SOURCE: msdsdsada.army.mil
 
 MESSAGE: pam_krb5: authenticate error: Client not found in Kerberos database (-1765328378)
 TIME: 2017-02-03T21:58:02.000Z
-HOST: 128.63.27.61
+HOST: 128.63.XX.XX
 SOURCE: ls17011-l
 
 MESSAGE: pam_krb5: authenticate error: Decrypt integrity check failed (-1765328353)
@@ -177,45 +180,50 @@ SOURCE: ls17011-l
 
 MESSAGE: fatal: Cannot bind any address.
 TIME: 2017-02-03T21:45:30.000Z
-HOST: 128.63.27.61
+HOST: 128.63.XX.XX
 SOURCE: magic.arl.army.mil
 
 MESSAGE: pam_krb5: authenticate error: Client not found in Kerberos database (-1765328378)
 TIME: 2017-02-03T21:19:13.000Z
-HOST: 128.63.27.61
+HOST: 128.63.XX.XX
 SOURCE: excelsior
 
 MESSAGE: pam_krb5: authenticate error: Preauthentication failed (-1765328360)
 TIME: 2017-02-03T21:19:11.000Z
-HOST: 128.63.27.61
-SOURCE: excelsior
+HOST: CCC.XXX.ZZZ.AAA
+SOURCE: exsdasd
 
 MESSAGE: pam_krb5: authenticate error: Client not found in Kerberos database (-1765328378)
 TIME: 2017-02-03T20:33:41.000Z
-HOST: 128.63.27.61
-SOURCE: pilsner
+HOST: XX.XXX.XX.XXX
+SOURCE: XCVBN
 
 MESSAGE: pam_krb5: authenticate error: Client name mismatch (-1765328309)
 TIME: 2017-02-03T20:33:39.000Z
-HOST: 128.63.27.61
-SOURCE: pilsner
+HOST: 128.XX.XX.XX
+SOURCE: XCVBN
 
 MESSAGE: fatal: Cannot bind any address.
 TIME: 2017-02-03T19:41:29.000Z
-HOST: 128.63.27.61
-SOURCE: motion.arl.army.mil
+HOST: 128.63.XX.XX
+SOURCE: XXX.arl.army.mil
 
 MESSAGE: fatal: Cannot bind any address.
 TIME: 2017-02-03T19:40:55.000Z
-HOST: 128.63.27.61
-SOURCE: sophia.arl.army.mil
+HOST: 123.123.123.123
+SOURCE: XXX.XXX.army.mil
 Windows Process Logs 
 Pipeline Windows Logs
 
+
+
 This Alert collects executables ran across the windows domains for a 30-day period, aggregates them according to process, and further aggregates them according to username (also, source ip possible)
+
+
 
  USE CASE: Daily Reporting, User Activity Monitoring, Process Management, Security Monitoring
  
+
 
 C:\Windows\SysWOW64\cmd.exe   
           NAE\IITEL13$ Results: 2464625
