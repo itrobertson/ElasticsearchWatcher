@@ -1,0 +1,84 @@
+POST _xpack/watcher/watch/_execute
+{
+"watch": {
+  "metadata": {
+    "window_period": "3d",
+    "last_period":"24h"
+  },
+  "trigger": {
+    "schedule": {
+      "interval": "24h"
+    }
+  },
+  "input": {
+    "search": {
+      "request": {
+        "indices": "pipeline-auth*",
+        "body": {
+          "query": {
+          "bool": {
+          "must": [
+            {
+            "range": {
+              "@timestamp": {
+                "gte": "now-{{ctx.metadata.window_period}}"
+              }}
+            }]}
+          },
+          "aggs": {
+            "periods": {
+              "filters": {
+                "filters": {
+                  "history": {
+                    "range": {
+                      "@timestamp": {
+                        "gte": "now-{{ctx.metadata.window_period}}"
+                      }
+                    }
+                  },
+                  "last_period": {
+                    "range": {
+                      "@timestamp": {
+                        "gte": "now-{{ctx.metadata.last_period}}"
+                      }
+                    }
+                  }
+                }
+              },
+              "aggs": {
+                "hosts": {
+                  "terms": {
+                    "field": "client_addr",
+                    "size": 10000
+                  }
+                }
+              }
+            }
+          },
+          "size": 0
+        }
+      }
+    }
+  },
+ "condition" : {
+  "script": "return ctx.payload.aggregations.periods.buckets.history.hosts.buckets.size() > ctx.payload.aggregations.periods.buckets.last_period.hosts.buckets.size();"
+  },
+  "transform": {
+        "script": {
+          "file": "transform-last-known-time"
+        }
+      },
+
+  "actions": {
+   
+        "send_email" : {
+
+        "email" : {
+                                  "to" : ["ian.t.robertson.ctr@mail.mil"],
+          "subject" : "Systems Reporting Status (Alpha)",
+               "body": "Pipeline Auth Logs\n@author: Ian Robertson\n\n   The following systems have not reported logs in the last {{ctx.metadata.last_period}} hours using  a {{ctx.metadata.window_period}} window.\nUSE CASE: Verify Systems Reporting, Systems connectivity, and/or Data Validation \nDo per each index type.\n\n {{#ctx.payload._value}}{{.}} \n \n {{/ctx.payload._value}}\n\nPayload: \n\n{{ctx.payload}}"
+        }
+      }
+    }
+  }
+}
