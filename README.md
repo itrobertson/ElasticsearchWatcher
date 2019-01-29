@@ -16,7 +16,9 @@ USE CASES:
 ---
 
 List of Use Cases Demonstrating Broad Capabilities:
+
 ---
+
 Contents
 Daily Status Reports	1
 New Activities Found	1
