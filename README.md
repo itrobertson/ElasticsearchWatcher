@@ -17,14 +17,14 @@ USE CASES:
 
 List of Use Cases Demonstrating Broad Capabilities:
 
----
 
-Contents
-Daily Status Reports	1
-New Activities Found	1
-Systems Reporting	3
-Critical Auth Logs	4
-Windows Process Logs	5
+
+Contents; 
+Daily Status Reports	1; 
+New Activities Found	1; 
+Systems Reporting	3; 
+Critical Auth Logs	4; 
+Windows Process Logs	5; 
 
 ---
 
