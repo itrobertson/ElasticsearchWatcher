@@ -1,0 +1,64 @@
+
+input {
+    http {
+        port => "9612"
+        type => "auth"
+        #codec => json{ }
+        }
+}
+filter {
+  #if [_type] == "auth" {
+        mutate {
+            gsub => [
+                "message", "\n", " "
+            ]
+         add_field => { "foo1" => "Hello world, %{type} from %{host}" }
+         add_field => { "foo2" => "Hello world, %{type} from %{host}" }
+        }
+        #kv { target  => "kv" }
+        #kv { value_split  => "=" }
+        ruby {
+        init => "require 'open3'"
+
+
+        code => "
+        body = event.get('message').to_s
+        cmd = '/home/elastic/v5rc1/scripts/pipeline-syslog.py -f body'
+        stdin, stdout, stderr = Open3.popen3(cmd)
+        read = stdout.read
+        if err.to_s.empty?
+                filter_matched(event)
+        #else
+        #       event.set('ext_script_err_msg') = err.to_s
+        end
+
+        #e = JSON.parse(event.get('message'))
+        #    e = event.get('message').split('},')
+        #my_obj = JSON.parse(e, :symbolize_names => true)
+        #   enew = event.get('message')
+        #puts e
+        #   File.write('/home/elastic/v5rc1/out.txt', e)
+        #ary = Array.new
+        #for i in e
+        # e.each do |x|
+        #    hash = JSON.parse(x)
+        #    hash.each do |key, value|
+        #        ary.push( { key =>  value } )
+        #    end
+        #end
+        #   bool_test = e.instance_of? Array
+        #   event.set('foo1', bool_test)
+        #   event.set('foo2', e[1])
+        "
+}
+}
+output {
+         #if [_type] == "auth" {
+                elasticsearch {
+                hosts => [ "111.222.333:9205" ]
+                index => "user-activities-%{+YYYY.MM.dd}"
+                user => "elastic"
+                password => "changeme"
+         #}
+        }
+}
