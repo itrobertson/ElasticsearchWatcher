@@ -1,0 +1,98 @@
+POST _xpack/watcher/watch/_execute
+{
+"watch": {
+  "metadata": {
+    "window_period": "7d",
+    "last_period":"24h"
+  },
+  "trigger": {
+    "schedule": {
+      "interval": "24h"
+    }
+  },
+  "input": {
+    "search": {
+      "request": {
+        "indices": "bb-hbss-audit-*",
+        "body": {
+          "query": {
+          "bool": {
+          "must": [
+            {
+            "range": {
+              "@timestamp": {
+                "gte": "now-{{ctx.metadata.window_period}}"
+              }}
+            }]}
+          },
+          "aggs": {
+            "periods": {
+              "filters": {
+                "filters": {
+                  "history": {
+                    "range": {
+                      "@timestamp": {
+                        "gte": "now-{{ctx.metadata.window_period}}"
+                      }
+                    }
+                  },
+                  "last_period": {
+                    "range": {
+                      "@timestamp": {
+                        "gte": "now-{{ctx.metadata.last_period}}"
+                      }
+                    }
+                  }
+                }
+              },
+              "aggs": {
+                "hosts": {
+                  "terms": {
+                    "field": "server.hostname.keyword",
+                    "size": 10000
+                  },
+                
+              
+               "aggs": {
+                "hostaddress": {
+                  "terms": {
+                    "field": "server.ip.keyword",
+                    "size": 10000
+                  }
+                }
+               }}}
+            }
+          },
+          "size": 0
+        }
+      }
+    }
+  },
+ "condition" : {
+  "script": "return ctx.payload.aggregations.periods.buckets.history.hosts.buckets.size() > ctx.payload.aggregations.periods.buckets.last_period.hosts.buckets.size();"
+  },
+  
+
+  "actions": {
+     "watcher-alerts" : {
+ 	"index" : {
+		"index" : "watcher",
+		"execution_time_field" : "triggered_time",
+		"doc_type" : "HBSS SYSTEMS REPORTING LOSS OF CONNECTIVITY ALERT. "
+    }},
+   
+        "send_email" : {
+
+        "email" : {
+                                 "to" : ["ian.t.robertson.ctr@mail.mil", "<VAR>"]
+                                 
+                                 "subject" : "HBSS Systems Reporting Loss of Connectivity",
+               "body": "Monitoring HBSS Logs\n@author: Ian Robertson\n\n  
+               The following systems have not reported logs in the last {{ctx.metadata.last_period}} hours.\n\nSystems Lost:\n\n {{#ctx.payload.aggregations.periods.buckets.history.hosts.buckets}}  \t{{key}}  on  {{#hostaddress.buckets}} {{key}} {{/hostaddress.buckets}}\n \n {{/ctx.payload.aggregations.periods.buckets.history.hosts.buckets}}\n\n"
+        }
+      }
+    }
+  }
+}
+
+      
