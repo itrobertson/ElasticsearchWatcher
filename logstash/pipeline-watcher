@@ -1,0 +1,74 @@
+input {
+    http {
+        port => "9612"
+        type => "auth"
+        #codec => json{ }
+        }
+}
+filter {
+  #if [type] == "auth" {
+        mutate {
+         add_field => { "foo1" => "Hello world, %{type} from %{host} at %{@timestamp}" }
+         #add_field => { "foo2" => "" }
+        }
+      ruby {
+        init => "require 'elasticsearch/transport'"
+
+      code => "
+        require 'elasticsearch'
+        require 'json'
+        require 'elasticsearch/transport'
+        require 'faraday'
+        require 'rubygems'
+        #body = event.get('message')
+#       client = Elasticsearch::Client.new hosts: [
+#  { host: 'bigbrother3',
+#    port: '9200',
+#    user: 'elastic',
+#    password: 'changeme',
+#    scheme: 'http'
+#  } ]
+        client = Elasticsearch::Client.new url: 'http://elastic:changeme@bigbrother3:9200'
+        search_term = event.get('message')
+        results = client.search index: '.watch*', body: { _source: 'result.input.payload.aggregations.by_user.buckets', query: { match: { _id: search_term } } }
+        #results = client.search index: '.watch*', body: {  query: { match: { _id: search_term } } }
+        p 'RESULTS:'
+        puts results
+        p ''
+        p 'SEARCH TERM:'
+        p search_term
+        #client.perform_request 'GET', '_cluster/health'
+        #response = client.perform_request 'GET', '_cat/nodes'
+        json_results = JSON.parse(results.to_json)
+        p 'TESTING Payload '
+        #json_results['hits'].each.to_s do |key|
+        puts json_results
+        #p key['key'].to_s
+        #p 'HITS'
+        #p json_results.keys
+        #p 'REFINING HITS...'
+        #jfoo = JSON.parse(json_results['hits']['hits'].to_json)
+        #jfoo.each_with_index do |key, index|
+        #       p 'JFOO LOOP '
+        #       puts index
+        #       p key
+        #end
+        #end
+           #bool_test = jfoo.instance_of? JSON
+           #other_bool_test = jfoo.is_a?(Array)
+           #event.set('foo1', json_results)
+           #event.set('foo2', )
+        "
+#}
+}
+}
+output {
+         #if [_type] == "auth" {
+                elasticsearch {
+                hosts => [ "127.0.0.1:9200" ]
+                index => "user-activities-%{+YYYY.MM.dd}"
+                user => "elastic"
+                password => "changeme"
+         #}
+        }
+}
