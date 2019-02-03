@@ -166,73 +166,14 @@ Do per each index type.
 
 ---
 
-128.63.93.64  
-128.63.18.63  
-2001:480:90:142:baca:3aff:fea3:9d5d  
-130.203.244.155  
-158.12.64.13  
-67.63.198.131  
-128.63.66.89  
-134.164.56.34  
-2001:480:30:602:baac:6fff:fe3c:fc7  
-140.31.68.20  
-158.12.37.69  
-158.12.44.94  
-205.68.95.65  
-134.194.200.185  
-131.92.254.10  
-2001:480:91:5401::7f5  
-2001:480:31:4420:225:90ff:fe5d:9fe4  
-158.12.62.33 
+123.456.789
+etc...
+
 Critical Auth Logs
 175 Critical Errors have occured in Auth Pipeline within past 24 hours
 
 ---
 
-MESSAGE: fatal: Cannot bind any address.
-TIME: 2017-02-03T22:16:26.000Z
-HOST:  XXX.XXX.XXX.XXX
-SOURCE: msdsdsada.army.mil
-
-MESSAGE: pam_krb5: authenticate error: Client not found in Kerberos database (-1765328378)
-TIME: 2017-02-03T21:58:02.000Z
-HOST: 128.63.XX.XX
-SOURCE: ls17011-l
-
-MESSAGE: pam_krb5: authenticate error: Decrypt integrity check failed (-1765328353)
-TIME: 2017-02-03T21:58:01.000Z
-HOST: 128.63.27.61
-SOURCE: ls17011-l
-
-MESSAGE: fatal: Cannot bind any address.
-TIME: 2017-02-03T21:45:30.000Z
-HOST: 128.63.XX.XX
-SOURCE: magic.arl.army.mil
-
-MESSAGE: pam_krb5: authenticate error: Client not found in Kerberos database (-1765328378)
-TIME: 2017-02-03T21:19:13.000Z
-HOST: 128.63.XX.XX
-SOURCE: excelsior
-
-MESSAGE: pam_krb5: authenticate error: Preauthentication failed (-1765328360)
-TIME: 2017-02-03T21:19:11.000Z
-HOST: CCC.XXX.ZZZ.AAA
-SOURCE: exsdasd
-
-MESSAGE: pam_krb5: authenticate error: Client not found in Kerberos database (-1765328378)
-TIME: 2017-02-03T20:33:41.000Z
-HOST: XX.XXX.XX.XXX
-SOURCE: XCVBN
-
-MESSAGE: pam_krb5: authenticate error: Client name mismatch (-1765328309)
-TIME: 2017-02-03T20:33:39.000Z
-HOST: 128.XX.XX.XX
-SOURCE: XCVBN
-
-MESSAGE: fatal: Cannot bind any address.
-TIME: 2017-02-03T19:41:29.000Z
-HOST: 128.63.XX.XX
-SOURCE: XXX.arl.army.mil
 
 MESSAGE: fatal: Cannot bind any address.
 TIME: 2017-02-03T19:40:55.000Z
