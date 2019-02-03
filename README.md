@@ -37,7 +37,7 @@ The following users are currently in an inactive state for the past 30 Days or m
 
 
 RAW DATA RESULTS:
-{jboyd=1, crosenberger=1, jkautz=1, sboyd=1, esmothers=1, dwhitten=1, jnelson=1, spersaud=1, russells=1, yamargui=1, Reedye=1, robinsona=1, tobenshain=1, lterada=1, rolayinka=1, wranglersystem=1, byrda=1, ablizzard=1, houstona=1, BLModest_SA=1, rcalvert=1, dgoldman=1, wgibson=1, jstorms=1, rparra=1, ddawson=1, dabotchie=1, skhanal=1, mschultz=1, nhoffman=1, blarson=1, gillemk=1, amartin=1, msandretto=1, mreich=1, mgutknecht=1, swilson=1, jjao=1, jnoseworthy=1, rrizvi=1, drivenbark=1, sewers=1, aosgood=1, gadams=1, ceddy=1, hmartin=1, aoniha=1, pontiac2system=1, rwilson=1}
+{jboyd=1, crosenberger=1, jkautz=1, sboyd=1, esmothers=1, dwhitten=1, jnelson=1, spersaud=1, russells=1, yamargui=1, Reedye=1, robinsona=1, tobenshain=1, lterada=1, rolayinka=1, wranglersystem=1, byrda=1, ablizzard=1, houstona=1, BLModest_SA=1, rcalvert=1, dgoldman=1, wgibson=1, jstorms=1, rparra=1, ddawson=1, dabotchie=1, skhanal=1, mschultz=1, nhoffman=1, blarson=1, gillemk=1, amartin=1, msandretto=1, mreich=1, mgutknecht=1, swilson=1, jjao=1, jnoseworthy=1, rrizvi=1, drivenbark=1, sewers=1, aosgood=1, gadams=1, ceddy=1, hmartin=1, pontiac2system=1, rwilson=1}
 
 ---
 
@@ -193,40 +193,20 @@ This Alert collects executables ran across the windows domains for a 30-day peri
 
 
 C:\Windows\SysWOW64\cmd.exe   
-          NAE\IITEL13$ Results: 2464625
-          NAE\ADLCWKLS2715K$ Results: 4935
-          NAE\lynn.edmiston.ao Results: 435
-          NAE\lynn.edmiston Results: 373
-          NT AUTHORITY\LOCAL SERVICE Results: 22
-          NAE\edward.c.albert2.ao Results: 2
-          NAE\thuan.nguyen2 Results: 1
+             REDACTED
 C:\Windows\System32\conhost.exe   
-          NAE\IITEL13$ Results: 2428339
-          NAE\ADLCWKLS2715K$ Results: 24636
+         REDACTED
 C:\Windows\SysWOW64\netsh.exe   
-          NAE\IITEL13$ Results: 89331
-          NAE\lynn.edmiston.ao Results: 25
-          NAE\lynn.edmiston Results: 20
-          NAE\ADLCWKLS2715K$ Results: 1
+          NAE\ABC Results: 89331
+          
 C:\Windows\SysWOW64\sc.exe   
-          NAE\IITEL13$ Results: 81146
-          NAE\ADLCWKLS2715K$ Results: 12
-          NAE\lynn.edmiston.ao Results: 4
+          REDacted
 C:\Program Files (x86)\McAfee\Policy Auditor Agent\fimcli.exe   
-          NAE\ADLCWKLS2715K$ Results: 12380
-          NAE\IITEL13$ Results: 8627
+          NAE\BETA Results: 12380
+          NAE\ALPHA Results: 8627
 C:\Windows\SysWOW64\tasklist.exe   
-          NAE\IITEL13$ Results: 16566
-          NAE\ADLCWKLS2715K$ Results: 2939
-C:\Windows\System32\SearchFilterHost.exe   
-          NAE\ADLCWKLS2715K$ Results: 14085
-          NAE\IITEL13$ Results: 864
-C:\Windows\System32\SearchProtocolHost.exe   
-          NAE\ADLCWKLS2715K$ Results: 13742
-          NAE\IITEL13$ Results: 909
-C:\Program Files (x86)\McAfee\Common Framework\MfeServiceMgr.exe   
-          NAE\ADLCWKLS2715K$ Results: 7074
-          NAE\IITEL13$ Results: 6315
-C:\Windows\SysWOW64\wbem\WmiPrvSE.exe   
-          NAE\ADLCWKLS2715K$ Results: 7588
-          NAE\IITEL13$ Results: 5410
+          NAE\DEF Results: 16566
+          NAE\ABC Results: 2939
+etc...
+
+etc...
