@@ -76,6 +76,7 @@ POST /_xpack/watcher/watch/_execute?pretty
 
         "email" : {
                        "to" : ["ian.t.robertson.ctr@mail.mil", "<VAR>"],  "subject" : "Who's Watching You?",
+                       
                "body": "Description: This is an overall look at a test instance of how we are analyzing user
                activities on our Windows Domain. Below is an aggregation of Windows User accounts combined with the Windows Event ID 
                for executables and sorted by number of occurrences within the last 7 days based upon a 
