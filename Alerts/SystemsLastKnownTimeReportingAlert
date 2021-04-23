@@ -76,7 +76,9 @@ POST _xpack/watcher/watch/_execute
         "email" : {
                                   "to" : ["ian.t.robertson.ctr@mail.mil"],
           "subject" : "Systems Reporting Status (Alpha)",
-               "body": "Pipeline Auth Logs\n@author: Ian Robertson\n\n   The following systems have not reported logs in the last {{ctx.metadata.last_period}} hours using  a {{ctx.metadata.window_period}} window.\nUSE CASE: Verify Systems Reporting, Systems connectivity, and/or Data Validation \nDo per each index type.\n\n {{#ctx.payload._value}}{{.}} \n \n {{/ctx.payload._value}}\n\nPayload: \n\n{{ctx.payload}}"
+               "body": "Pipeline Auth Logs\n@author: Ian Robertson\n\n   The following systems have not reported logs in the last {{ctx.metadata.last_period}} hours
+               using  a {{ctx.metadata.window_period}} window.\nUSE CASE: Verify Systems Reporting, Systems connectivity, and/or Data Validation \n
+               Do per each index type.\n\n {{#ctx.payload._value}}{{.}} \n \n {{/ctx.payload._value}}\n\nPayload: \n\n{{ctx.payload}}"
         }
       }
     }
