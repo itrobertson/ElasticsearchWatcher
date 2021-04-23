@@ -66,7 +66,18 @@ PUT _xpack/watcher/watch/inactive-users
                       "scripted_metric": {
                         "init_script": "params._agg.logins = []",
                         "map_script": "params._agg.logins.add(doc.starttime.value)",
-           "reduce_script": "def login_times = [];for (agg in params._aggs){for (times in agg.values()) {for (time in times) {login_times.add(time);}}}Collections.sort(login_times);def period_ms = 30L * 24 * 60 * 60 * 1000;def inactive_periods = [];def t1 = login_times.get(login_times.size()-1);def t2 = System.currentTimeMillis();def inactive_duration = t2 - t1;if (inactive_duration > period_ms) {def start = new Date(t1);def end = new Date(t2);def duration = Duration.ofMillis(inactive_duration);inactive_periods.add(['login': start, 'next_login': end, 'duration_iso8601': duration]);}return ['hits': inactive_periods.size(), 'periods': inactive_periods];"
+           "reduce_script": "def login_times = [];
+           for (agg in params._aggs){for (times in agg.values()) {for (time in times) 
+           {login_times.add(time);
+           }}}Collections.sort(login_times);
+           def period_ms = 30L * 24 * 60 * 60 * 1000;
+           def inactive_periods = [];
+           def t1 = login_times.get(login_times.size()-1);
+           def t2 = System.currentTimeMillis();def inactive_duration = t2 - t1;
+           if (inactive_duration > period_ms) {def start = new Date(t1);
+           def end = new Date(t2);
+           def duration = Duration.ofMillis(inactive_duration);
+           inactive_periods.add(['login': start, 'next_login': end, 'duration_iso8601': duration]);}return ['hits': inactive_periods.size(), 'periods': inactive_periods];"
                       }
                     }
                   }
@@ -82,7 +93,8 @@ PUT _xpack/watcher/watch/inactive-users
       },
 
 "transform" : {
-  "script" : "def output = []; for (b in ctx.payload.aggregations.by_user.buckets){ if (b.inactive_periods.value.hits == 0) { continue; }   output.add( b.key);} Collections.sort(output); return output;"
+  "script" : "def output = []; for (b in ctx.payload.aggregations.by_user.buckets){ if (b.inactive_periods.value.hits == 0)
+  { continue; }   output.add( b.key);} Collections.sort(output); return output;"
 
 },
       "actions": {
@@ -91,7 +103,8 @@ PUT _xpack/watcher/watch/inactive-users
         "email" : {
                 "to" : ["ian.t.robertson.ctr@mail.mil", "<VAR>"],                
   "subject" : "DAILY INACTIVE USER REPORT",
-               "body": "The following users are currently in a state of inactivity. The period of inactivity is defined as greater than or equal to 30 days from today:\n\nUsing the HBSS Audit Dataset.\n\nUSERNAME  \n\n {{#ctx.payload._value}} \t {{.}} \n\n{{/ctx.payload._value}}"
+               "body": "The following users are currently in a state of inactivity. The period of inactivity is defined as greater than or equal to 30 days 
+               from today:\n\nUsing the HBSS Audit Dataset.\n\nUSERNAME  \n\n {{#ctx.payload._value}} \t {{.}} \n\n{{/ctx.payload._value}}"
         }
       }}
 }
