@@ -88,7 +88,9 @@ POST _xpack/watcher/watch/_execute
                                  
                                  "subject" : "HBSS Systems Reporting Loss of Connectivity",
                "body": "Monitoring HBSS Logs\n@author: Ian Robertson\n\n  
-               The following systems have not reported logs in the last {{ctx.metadata.last_period}} hours.\n\nSystems Lost:\n\n {{#ctx.payload.aggregations.periods.buckets.history.hosts.buckets}}  \t{{key}}  on  {{#hostaddress.buckets}} {{key}} {{/hostaddress.buckets}}\n \n {{/ctx.payload.aggregations.periods.buckets.history.hosts.buckets}}\n\n"
+               The following systems have not reported logs in the last {{ctx.metadata.last_period}} hours.\n\nSystems Lost:\n\n 
+	       {{#ctx.payload.aggregations.periods.buckets.history.hosts.buckets}}  \t{{key}}  on  {{#hostaddress.buckets}} {{key}} {{/hostaddress.buckets}}\n \n 
+	       {{/ctx.payload.aggregations.periods.buckets.history.hosts.buckets}}\n\n"
         }
       }
     }
